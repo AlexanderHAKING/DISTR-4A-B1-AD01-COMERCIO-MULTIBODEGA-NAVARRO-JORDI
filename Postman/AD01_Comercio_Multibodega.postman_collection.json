@@ -1,0 +1,2191 @@
+{
+  "info": {
+    "_postman_id": "7c09af63-9a03-4465-bf2b-b5b2c0ba7d44",
+    "name": "AD01 Comercio Multibodega - Nivel Basico",
+    "description": "Colección de prueba para las tres APIs (Catalogo, Inventario, Pedidos). Ejecutar las carpetas 01, 02 y 03 en ese orden. La carpeta 05 contiene borrados opcionales; no ejecutar todos sin revisar referencias.",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "item": [
+    {
+      "name": "01 - Catalogo (ejecutar primero)",
+      "item": [
+        {
+          "name": "01 Crear categoria",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{urlCatalogo}}/api/Categorias",
+              "host": [
+                "{{urlCatalogo}}"
+              ],
+              "path": [
+                "api",
+                "Categorias"
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"nombre\": \"Computadoras\",\n  \"descripcion\": \"Equipos de tecnologia\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test(\"HTTP 201\", function () { pm.response.to.have.status(201); });",
+                  "if (pm.response.code === 201) {",
+                  "  pm.collectionVariables.set(\"idCategoria\", pm.response.json().idCategoria);",
+                  "}"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ]
+        },
+        {
+          "name": "02 Listar categorias",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{urlCatalogo}}/api/Categorias",
+              "host": [
+                "{{urlCatalogo}}"
+              ],
+              "path": [
+                "api",
+                "Categorias"
+              ]
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test(\"HTTP 200\", function () { pm.response.to.have.status(200); });"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ]
+        },
+        {
+          "name": "03 Buscar categoria por ID",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{urlCatalogo}}/api/Categorias/{{idCategoria}}",
+              "host": [
+                "{{urlCatalogo}}"
+              ],
+              "path": [
+                "api",
+                "Categorias",
+                "{{idCategoria}}"
+              ]
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test(\"HTTP 200\", function () { pm.response.to.have.status(200); });"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ]
+        },
+        {
+          "name": "04 Actualizar categoria",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{urlCatalogo}}/api/Categorias/{{idCategoria}}",
+              "host": [
+                "{{urlCatalogo}}"
+              ],
+              "path": [
+                "api",
+                "Categorias",
+                "{{idCategoria}}"
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"idCategoria\": {{idCategoria}},\n  \"nombre\": \"Computadoras y accesorios\",\n  \"descripcion\": \"Productos tecnologicos\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test(\"HTTP 204\", function () { pm.response.to.have.status(204); });"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ]
+        },
+        {
+          "name": "05 Crear marca",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{urlCatalogo}}/api/Marcas",
+              "host": [
+                "{{urlCatalogo}}"
+              ],
+              "path": [
+                "api",
+                "Marcas"
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"nombre\": \"Lenovo\",\n  \"paisOrigen\": \"China\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test(\"HTTP 201\", function () { pm.response.to.have.status(201); });",
+                  "if (pm.response.code === 201) {",
+                  "  pm.collectionVariables.set(\"idMarca\", pm.response.json().idMarca);",
+                  "}"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ]
+        },
+        {
+          "name": "06 Listar marcas",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{urlCatalogo}}/api/Marcas",
+              "host": [
+                "{{urlCatalogo}}"
+              ],
+              "path": [
+                "api",
+                "Marcas"
+              ]
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test(\"HTTP 200\", function () { pm.response.to.have.status(200); });"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ]
+        },
+        {
+          "name": "07 Buscar marca por ID",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{urlCatalogo}}/api/Marcas/{{idMarca}}",
+              "host": [
+                "{{urlCatalogo}}"
+              ],
+              "path": [
+                "api",
+                "Marcas",
+                "{{idMarca}}"
+              ]
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test(\"HTTP 200\", function () { pm.response.to.have.status(200); });"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ]
+        },
+        {
+          "name": "08 Actualizar marca",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{urlCatalogo}}/api/Marcas/{{idMarca}}",
+              "host": [
+                "{{urlCatalogo}}"
+              ],
+              "path": [
+                "api",
+                "Marcas",
+                "{{idMarca}}"
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"idMarca\": {{idMarca}},\n  \"nombre\": \"Lenovo\",\n  \"paisOrigen\": \"China\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test(\"HTTP 204\", function () { pm.response.to.have.status(204); });"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ]
+        },
+        {
+          "name": "09 Crear producto",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{urlCatalogo}}/api/Productos",
+              "host": [
+                "{{urlCatalogo}}"
+              ],
+              "path": [
+                "api",
+                "Productos"
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"idCategoria\": {{idCategoria}},\n  \"idMarca\": {{idMarca}},\n  \"nombre\": \"Laptop Lenovo\",\n  \"sku\": \"LAP-LEN-AD01\",\n  \"precio\": 250,\n  \"estado\": true\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test(\"HTTP 201\", function () { pm.response.to.have.status(201); });",
+                  "if (pm.response.code === 201) {",
+                  "  pm.collectionVariables.set(\"idProducto\", pm.response.json().idProducto);",
+                  "}"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ]
+        },
+        {
+          "name": "10 Listar productos",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{urlCatalogo}}/api/Productos",
+              "host": [
+                "{{urlCatalogo}}"
+              ],
+              "path": [
+                "api",
+                "Productos"
+              ]
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test(\"HTTP 200\", function () { pm.response.to.have.status(200); });"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ]
+        },
+        {
+          "name": "11 Buscar producto por ID",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{urlCatalogo}}/api/Productos/{{idProducto}}",
+              "host": [
+                "{{urlCatalogo}}"
+              ],
+              "path": [
+                "api",
+                "Productos",
+                "{{idProducto}}"
+              ]
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test(\"HTTP 200\", function () { pm.response.to.have.status(200); });"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ]
+        },
+        {
+          "name": "12 Actualizar producto",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{urlCatalogo}}/api/Productos/{{idProducto}}",
+              "host": [
+                "{{urlCatalogo}}"
+              ],
+              "path": [
+                "api",
+                "Productos",
+                "{{idProducto}}"
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"idProducto\": {{idProducto}},\n  \"idCategoria\": {{idCategoria}},\n  \"idMarca\": {{idMarca}},\n  \"nombre\": \"Laptop Lenovo Basica\",\n  \"sku\": \"LAP-LEN-AD01\",\n  \"precio\": 260,\n  \"estado\": true\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test(\"HTTP 204\", function () { pm.response.to.have.status(204); });"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "02 - Inventario (con Catalogo iniciado)",
+      "item": [
+        {
+          "name": "01 Crear bodega",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{urlInventario}}/api/Bodegas",
+              "host": [
+                "{{urlInventario}}"
+              ],
+              "path": [
+                "api",
+                "Bodegas"
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"nombre\": \"Bodega Principal\",\n  \"ciudad\": \"Quito\",\n  \"direccion\": \"Av. de la Prensa y La Ofelia\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test(\"HTTP 201\", function () { pm.response.to.have.status(201); });",
+                  "if (pm.response.code === 201) {",
+                  "  pm.collectionVariables.set(\"idBodega\", pm.response.json().idBodega);",
+                  "}"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ]
+        },
+        {
+          "name": "02 Listar bodegas",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{urlInventario}}/api/Bodegas",
+              "host": [
+                "{{urlInventario}}"
+              ],
+              "path": [
+                "api",
+                "Bodegas"
+              ]
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test(\"HTTP 200\", function () { pm.response.to.have.status(200); });"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ]
+        },
+        {
+          "name": "03 Buscar bodega por ID",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{urlInventario}}/api/Bodegas/{{idBodega}}",
+              "host": [
+                "{{urlInventario}}"
+              ],
+              "path": [
+                "api",
+                "Bodegas",
+                "{{idBodega}}"
+              ]
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test(\"HTTP 200\", function () { pm.response.to.have.status(200); });"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ]
+        },
+        {
+          "name": "04 Actualizar bodega",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{urlInventario}}/api/Bodegas/{{idBodega}}",
+              "host": [
+                "{{urlInventario}}"
+              ],
+              "path": [
+                "api",
+                "Bodegas",
+                "{{idBodega}}"
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"idBodega\": {{idBodega}},\n  \"nombre\": \"Bodega Principal Quito\",\n  \"ciudad\": \"Quito\",\n  \"direccion\": \"Av. de la Prensa y La Ofelia\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test(\"HTTP 204\", function () { pm.response.to.have.status(204); });"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ]
+        },
+        {
+          "name": "05 Registrar existencia (10 unidades)",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{urlInventario}}/api/Existencias",
+              "host": [
+                "{{urlInventario}}"
+              ],
+              "path": [
+                "api",
+                "Existencias"
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"idProducto\": {{idProducto}},\n  \"idBodega\": {{idBodega}},\n  \"stock\": 10\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test(\"HTTP 201\", function () { pm.response.to.have.status(201); });",
+                  "if (pm.response.code === 201) {",
+                  "  pm.collectionVariables.set(\"idExistencia\", pm.response.json().idExistencia);",
+                  "}"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ]
+        },
+        {
+          "name": "06 Listar existencias",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{urlInventario}}/api/Existencias",
+              "host": [
+                "{{urlInventario}}"
+              ],
+              "path": [
+                "api",
+                "Existencias"
+              ]
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test(\"HTTP 200\", function () { pm.response.to.have.status(200); });"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ]
+        },
+        {
+          "name": "07 Buscar existencia por ID",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{urlInventario}}/api/Existencias/{{idExistencia}}",
+              "host": [
+                "{{urlInventario}}"
+              ],
+              "path": [
+                "api",
+                "Existencias",
+                "{{idExistencia}}"
+              ]
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test(\"HTTP 200\", function () { pm.response.to.have.status(200); });"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ]
+        },
+        {
+          "name": "08 Actualizar existencia (12 unidades)",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{urlInventario}}/api/Existencias/{{idExistencia}}",
+              "host": [
+                "{{urlInventario}}"
+              ],
+              "path": [
+                "api",
+                "Existencias",
+                "{{idExistencia}}"
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"idExistencia\": {{idExistencia}},\n  \"idProducto\": {{idProducto}},\n  \"idBodega\": {{idBodega}},\n  \"stock\": 12\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test(\"HTTP 204\", function () { pm.response.to.have.status(204); });"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ]
+        },
+        {
+          "name": "09 Movimiento ENTRADA (+5)",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{urlInventario}}/api/Movimientos",
+              "host": [
+                "{{urlInventario}}"
+              ],
+              "path": [
+                "api",
+                "Movimientos"
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"idProducto\": {{idProducto}},\n  \"idBodega\": {{idBodega}},\n  \"tipo\": \"ENTRADA\",\n  \"cantidad\": 5\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test(\"HTTP 201\", function () { pm.response.to.have.status(201); });",
+                  "if (pm.response.code === 201) {",
+                  "  pm.collectionVariables.set(\"idMovimiento\", pm.response.json().idMovimiento);",
+                  "}"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ]
+        },
+        {
+          "name": "10 Consultar movimientos",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{urlInventario}}/api/Movimientos",
+              "host": [
+                "{{urlInventario}}"
+              ],
+              "path": [
+                "api",
+                "Movimientos"
+              ]
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test(\"HTTP 200\", function () { pm.response.to.have.status(200); });"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ]
+        },
+        {
+          "name": "11 Buscar movimiento por ID",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{urlInventario}}/api/Movimientos/{{idMovimiento}}",
+              "host": [
+                "{{urlInventario}}"
+              ],
+              "path": [
+                "api",
+                "Movimientos",
+                "{{idMovimiento}}"
+              ]
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test(\"HTTP 200\", function () { pm.response.to.have.status(200); });"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ]
+        },
+        {
+          "name": "12 Reservar 3 unidades",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{urlInventario}}/api/Reservas",
+              "host": [
+                "{{urlInventario}}"
+              ],
+              "path": [
+                "api",
+                "Reservas"
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"idProducto\": {{idProducto}},\n  \"idBodega\": {{idBodega}},\n  \"cantidad\": 3,\n  \"estado\": \"ACTIVA\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test(\"HTTP 201\", function () { pm.response.to.have.status(201); });",
+                  "if (pm.response.code === 201) {",
+                  "  pm.collectionVariables.set(\"idReserva\", pm.response.json().idReserva);",
+                  "}"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ]
+        },
+        {
+          "name": "13 Listar reservas",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{urlInventario}}/api/Reservas",
+              "host": [
+                "{{urlInventario}}"
+              ],
+              "path": [
+                "api",
+                "Reservas"
+              ]
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test(\"HTTP 200\", function () { pm.response.to.have.status(200); });"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ]
+        },
+        {
+          "name": "14 Buscar reserva por ID",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{urlInventario}}/api/Reservas/{{idReserva}}",
+              "host": [
+                "{{urlInventario}}"
+              ],
+              "path": [
+                "api",
+                "Reservas",
+                "{{idReserva}}"
+              ]
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test(\"HTTP 200\", function () { pm.response.to.have.status(200); });"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ]
+        },
+        {
+          "name": "15 Actualizar reserva a 2 unidades",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{urlInventario}}/api/Reservas/{{idReserva}}",
+              "host": [
+                "{{urlInventario}}"
+              ],
+              "path": [
+                "api",
+                "Reservas",
+                "{{idReserva}}"
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"idReserva\": {{idReserva}},\n  \"idProducto\": {{idProducto}},\n  \"idBodega\": {{idBodega}},\n  \"cantidad\": 2,\n  \"estado\": \"ACTIVA\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test(\"HTTP 204\", function () { pm.response.to.have.status(204); });"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ]
+        },
+        {
+          "name": "16 Movimiento SALIDA (-2)",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{urlInventario}}/api/Movimientos",
+              "host": [
+                "{{urlInventario}}"
+              ],
+              "path": [
+                "api",
+                "Movimientos"
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"idProducto\": {{idProducto}},\n  \"idBodega\": {{idBodega}},\n  \"tipo\": \"SALIDA\",\n  \"cantidad\": 2\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test(\"HTTP 201\", function () { pm.response.to.have.status(201); });"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ]
+        },
+        {
+          "name": "17 Consultar stock disponible (stock menos reservas)",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{urlInventario}}/api/Existencias/disponibles/{{idProducto}}",
+              "host": [
+                "{{urlInventario}}"
+              ],
+              "path": [
+                "api",
+                "Existencias",
+                "disponibles",
+                "{{idProducto}}"
+              ]
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test(\"HTTP 200\", function () { pm.response.to.have.status(200); });"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "03 - Pedidos (con Catalogo e Inventario iniciados)",
+      "item": [
+        {
+          "name": "01 Crear cliente",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{urlPedidos}}/api/Clientes",
+              "host": [
+                "{{urlPedidos}}"
+              ],
+              "path": [
+                "api",
+                "Clientes"
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"nombres\": \"Maria Andrade\",\n  \"cedula\": \"1712345678\",\n  \"correo\": \"maria.ejemplo@correo.com\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test(\"HTTP 201\", function () { pm.response.to.have.status(201); });",
+                  "if (pm.response.code === 201) {",
+                  "  pm.collectionVariables.set(\"idCliente\", pm.response.json().idCliente);",
+                  "}"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ]
+        },
+        {
+          "name": "02 Listar clientes",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{urlPedidos}}/api/Clientes",
+              "host": [
+                "{{urlPedidos}}"
+              ],
+              "path": [
+                "api",
+                "Clientes"
+              ]
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test(\"HTTP 200\", function () { pm.response.to.have.status(200); });"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ]
+        },
+        {
+          "name": "03 Buscar cliente por ID",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{urlPedidos}}/api/Clientes/{{idCliente}}",
+              "host": [
+                "{{urlPedidos}}"
+              ],
+              "path": [
+                "api",
+                "Clientes",
+                "{{idCliente}}"
+              ]
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test(\"HTTP 200\", function () { pm.response.to.have.status(200); });"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ]
+        },
+        {
+          "name": "04 Actualizar cliente",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{urlPedidos}}/api/Clientes/{{idCliente}}",
+              "host": [
+                "{{urlPedidos}}"
+              ],
+              "path": [
+                "api",
+                "Clientes",
+                "{{idCliente}}"
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"idCliente\": {{idCliente}},\n  \"nombres\": \"Maria A. Andrade\",\n  \"cedula\": \"1712345678\",\n  \"correo\": \"maria.ejemplo@correo.com\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test(\"HTTP 204\", function () { pm.response.to.have.status(204); });"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ]
+        },
+        {
+          "name": "05 Crear pedido (total inicial 0)",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{urlPedidos}}/api/Pedidos",
+              "host": [
+                "{{urlPedidos}}"
+              ],
+              "path": [
+                "api",
+                "Pedidos"
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"idCliente\": {{idCliente}}\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test(\"HTTP 201\", function () { pm.response.to.have.status(201); });",
+                  "if (pm.response.code === 201) {",
+                  "  pm.collectionVariables.set(\"idPedido\", pm.response.json().idPedido);",
+                  "}"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ]
+        },
+        {
+          "name": "06 Listar pedidos",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{urlPedidos}}/api/Pedidos",
+              "host": [
+                "{{urlPedidos}}"
+              ],
+              "path": [
+                "api",
+                "Pedidos"
+              ]
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test(\"HTTP 200\", function () { pm.response.to.have.status(200); });"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ]
+        },
+        {
+          "name": "07 Buscar pedido y detalles",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{urlPedidos}}/api/Pedidos/{{idPedido}}",
+              "host": [
+                "{{urlPedidos}}"
+              ],
+              "path": [
+                "api",
+                "Pedidos",
+                "{{idPedido}}"
+              ]
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test(\"HTTP 200\", function () { pm.response.to.have.status(200); });"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ]
+        },
+        {
+          "name": "08 Agregar detalle (2 x 260)",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{urlPedidos}}/api/Detalles",
+              "host": [
+                "{{urlPedidos}}"
+              ],
+              "path": [
+                "api",
+                "Detalles"
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"idPedido\": {{idPedido}},\n  \"idProducto\": {{idProducto}},\n  \"cantidad\": 2,\n  \"precioUnitario\": 260\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test(\"HTTP 201\", function () { pm.response.to.have.status(201); });",
+                  "if (pm.response.code === 201) {",
+                  "  pm.collectionVariables.set(\"idDetalle\", pm.response.json().idDetalle);",
+                  "}"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ]
+        },
+        {
+          "name": "09 Listar detalles",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{urlPedidos}}/api/Detalles",
+              "host": [
+                "{{urlPedidos}}"
+              ],
+              "path": [
+                "api",
+                "Detalles"
+              ]
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test(\"HTTP 200\", function () { pm.response.to.have.status(200); });"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ]
+        },
+        {
+          "name": "10 Buscar detalle por ID",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{urlPedidos}}/api/Detalles/{{idDetalle}}",
+              "host": [
+                "{{urlPedidos}}"
+              ],
+              "path": [
+                "api",
+                "Detalles",
+                "{{idDetalle}}"
+              ]
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test(\"HTTP 200\", function () { pm.response.to.have.status(200); });"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ]
+        },
+        {
+          "name": "11 Actualizar detalle (3 x 260)",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{urlPedidos}}/api/Detalles/{{idDetalle}}",
+              "host": [
+                "{{urlPedidos}}"
+              ],
+              "path": [
+                "api",
+                "Detalles",
+                "{{idDetalle}}"
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"idDetalle\": {{idDetalle}},\n  \"idPedido\": {{idPedido}},\n  \"idProducto\": {{idProducto}},\n  \"cantidad\": 3,\n  \"precioUnitario\": 260\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test(\"HTTP 204\", function () { pm.response.to.have.status(204); });"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ]
+        },
+        {
+          "name": "12 Ver total recalculado (780)",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{urlPedidos}}/api/Pedidos/{{idPedido}}",
+              "host": [
+                "{{urlPedidos}}"
+              ],
+              "path": [
+                "api",
+                "Pedidos",
+                "{{idPedido}}"
+              ]
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test(\"HTTP 200\", function () { pm.response.to.have.status(200); });"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ]
+        },
+        {
+          "name": "13 Consultar disponibilidad en Inventario.Api",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{urlPedidos}}/api/Pedidos/{{idPedido}}/disponibilidad",
+              "host": [
+                "{{urlPedidos}}"
+              ],
+              "path": [
+                "api",
+                "Pedidos",
+                "{{idPedido}}",
+                "disponibilidad"
+              ]
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test(\"HTTP 200\", function () { pm.response.to.have.status(200); });"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ]
+        },
+        {
+          "name": "14 Confirmar pedido",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{urlPedidos}}/api/Pedidos/{{idPedido}}",
+              "host": [
+                "{{urlPedidos}}"
+              ],
+              "path": [
+                "api",
+                "Pedidos",
+                "{{idPedido}}"
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"idPedido\": {{idPedido}},\n  \"idCliente\": {{idCliente}},\n  \"estado\": \"CONFIRMADO\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test(\"HTTP 204\", function () { pm.response.to.have.status(204); });"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ]
+        },
+        {
+          "name": "15 Ver pedido confirmado",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{urlPedidos}}/api/Pedidos/{{idPedido}}",
+              "host": [
+                "{{urlPedidos}}"
+              ],
+              "path": [
+                "api",
+                "Pedidos",
+                "{{idPedido}}"
+              ]
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test(\"HTTP 200\", function () { pm.response.to.have.status(200); });"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "04 - Pruebas de errores 400 y 404",
+      "item": [
+        {
+          "name": "01 Producto inexistente -> 404",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{urlCatalogo}}/api/Productos/999999",
+              "host": [
+                "{{urlCatalogo}}"
+              ],
+              "path": [
+                "api",
+                "Productos",
+                "999999"
+              ]
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test(\"HTTP 404\", function () { pm.response.to.have.status(404); });"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ]
+        },
+        {
+          "name": "02 Producto con precio negativo -> 400",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{urlCatalogo}}/api/Productos",
+              "host": [
+                "{{urlCatalogo}}"
+              ],
+              "path": [
+                "api",
+                "Productos"
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"idCategoria\": {{idCategoria}},\n  \"idMarca\": {{idMarca}},\n  \"nombre\": \"Producto Error\",\n  \"sku\": \"ERROR-AD01\",\n  \"precio\": -1,\n  \"estado\": true\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test(\"HTTP 400\", function () { pm.response.to.have.status(400); });"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ]
+        },
+        {
+          "name": "03 Salida mayor al stock -> 400",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{urlInventario}}/api/Movimientos",
+              "host": [
+                "{{urlInventario}}"
+              ],
+              "path": [
+                "api",
+                "Movimientos"
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"idProducto\": {{idProducto}},\n  \"idBodega\": {{idBodega}},\n  \"tipo\": \"SALIDA\",\n  \"cantidad\": 99999\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test(\"HTTP 400\", function () { pm.response.to.have.status(400); });"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ]
+        },
+        {
+          "name": "04 Reserva mayor al stock -> 400",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{urlInventario}}/api/Reservas",
+              "host": [
+                "{{urlInventario}}"
+              ],
+              "path": [
+                "api",
+                "Reservas"
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"idProducto\": {{idProducto}},\n  \"idBodega\": {{idBodega}},\n  \"cantidad\": 99999,\n  \"estado\": \"ACTIVA\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test(\"HTTP 400\", function () { pm.response.to.have.status(400); });"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ]
+        },
+        {
+          "name": "05 Pedido inexistente -> 404",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{urlPedidos}}/api/Pedidos/999999",
+              "host": [
+                "{{urlPedidos}}"
+              ],
+              "path": [
+                "api",
+                "Pedidos",
+                "999999"
+              ]
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test(\"HTTP 404\", function () { pm.response.to.have.status(404); });"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "05 - DELETE (opcionales, ejecutar de uno en uno)",
+      "item": [
+        {
+          "name": "00 Regresar pedido a PENDIENTE antes de borrar detalle",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{urlPedidos}}/api/Pedidos/{{idPedido}}",
+              "host": [
+                "{{urlPedidos}}"
+              ],
+              "path": [
+                "api",
+                "Pedidos",
+                "{{idPedido}}"
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"idPedido\": {{idPedido}},\n  \"idCliente\": {{idCliente}},\n  \"estado\": \"PENDIENTE\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test(\"HTTP 204\", function () { pm.response.to.have.status(204); });"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ]
+        },
+        {
+          "name": "01 Eliminar detalle",
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "url": {
+              "raw": "{{urlPedidos}}/api/Detalles/{{idDetalle}}",
+              "host": [
+                "{{urlPedidos}}"
+              ],
+              "path": [
+                "api",
+                "Detalles",
+                "{{idDetalle}}"
+              ]
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test(\"HTTP 204\", function () { pm.response.to.have.status(204); });"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ]
+        },
+        {
+          "name": "02 Eliminar pedido",
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "url": {
+              "raw": "{{urlPedidos}}/api/Pedidos/{{idPedido}}",
+              "host": [
+                "{{urlPedidos}}"
+              ],
+              "path": [
+                "api",
+                "Pedidos",
+                "{{idPedido}}"
+              ]
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test(\"HTTP 204\", function () { pm.response.to.have.status(204); });"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ]
+        },
+        {
+          "name": "03 Eliminar cliente",
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "url": {
+              "raw": "{{urlPedidos}}/api/Clientes/{{idCliente}}",
+              "host": [
+                "{{urlPedidos}}"
+              ],
+              "path": [
+                "api",
+                "Clientes",
+                "{{idCliente}}"
+              ]
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test(\"HTTP 204\", function () { pm.response.to.have.status(204); });"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ]
+        },
+        {
+          "name": "04 Eliminar reserva",
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "url": {
+              "raw": "{{urlInventario}}/api/Reservas/{{idReserva}}",
+              "host": [
+                "{{urlInventario}}"
+              ],
+              "path": [
+                "api",
+                "Reservas",
+                "{{idReserva}}"
+              ]
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test(\"HTTP 204\", function () { pm.response.to.have.status(204); });"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ]
+        },
+        {
+          "name": "05 Intentar borrar existencia (rechazada si hay movimientos) -> 400",
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "url": {
+              "raw": "{{urlInventario}}/api/Existencias/{{idExistencia}}",
+              "host": [
+                "{{urlInventario}}"
+              ],
+              "path": [
+                "api",
+                "Existencias",
+                "{{idExistencia}}"
+              ]
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test(\"HTTP 400\", function () { pm.response.to.have.status(400); });"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ]
+        },
+        {
+          "name": "06 Intentar borrar bodega (rechazada si hay movimientos) -> 400",
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "url": {
+              "raw": "{{urlInventario}}/api/Bodegas/{{idBodega}}",
+              "host": [
+                "{{urlInventario}}"
+              ],
+              "path": [
+                "api",
+                "Bodegas",
+                "{{idBodega}}"
+              ]
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test(\"HTTP 400\", function () { pm.response.to.have.status(400); });"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ]
+        },
+        {
+          "name": "07 Crear producto de prueba sin inventario (para borrarlo)",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{urlCatalogo}}/api/Productos",
+              "host": [
+                "{{urlCatalogo}}"
+              ],
+              "path": [
+                "api",
+                "Productos"
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"idCategoria\": {{idCategoria}},\n  \"idMarca\": {{idMarca}},\n  \"nombre\": \"Producto Temporal de Borrado\",\n  \"sku\": \"PRUEBA-BORRAR-AD01\",\n  \"precio\": 10,\n  \"estado\": true\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"HTTP 201\", function () { pm.response.to.have.status(201); });",
+                  "if (pm.response.code === 201) { pm.collectionVariables.set(\"idProductoTemporal\", pm.response.json().idProducto); }"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "08 Eliminar producto de prueba (sin referencias)",
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "url": {
+              "raw": "{{urlCatalogo}}/api/Productos/{{idProductoTemporal}}",
+              "host": [
+                "{{urlCatalogo}}"
+              ],
+              "path": [
+                "api",
+                "Productos",
+                "{{idProductoTemporal}}"
+              ]
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"HTTP 204\", function () { pm.response.to.have.status(204); });"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "09 Intentar borrar marca con producto asociado (rechazado)",
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "url": {
+              "raw": "{{urlCatalogo}}/api/Marcas/{{idMarca}}",
+              "host": [
+                "{{urlCatalogo}}"
+              ],
+              "path": [
+                "api",
+                "Marcas",
+                "{{idMarca}}"
+              ]
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"HTTP 400\", function () { pm.response.to.have.status(400); });"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "10 Intentar borrar categoria con producto asociado (rechazado)",
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "url": {
+              "raw": "{{urlCatalogo}}/api/Categorias/{{idCategoria}}",
+              "host": [
+                "{{urlCatalogo}}"
+              ],
+              "path": [
+                "api",
+                "Categorias",
+                "{{idCategoria}}"
+              ]
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"HTTP 400\", function () { pm.response.to.have.status(400); });"
+                ]
+              }
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "variable": [
+    {
+      "key": "urlCatalogo",
+      "value": "http://localhost:5001"
+    },
+    {
+      "key": "urlInventario",
+      "value": "http://localhost:5002"
+    },
+    {
+      "key": "urlPedidos",
+      "value": "http://localhost:5003"
+    },
+    {
+      "key": "idCategoria",
+      "value": "1"
+    },
+    {
+      "key": "idMarca",
+      "value": "1"
+    },
+    {
+      "key": "idProducto",
+      "value": "1"
+    },
+    {
+      "key": "idBodega",
+      "value": "1"
+    },
+    {
+      "key": "idExistencia",
+      "value": "1"
+    },
+    {
+      "key": "idMovimiento",
+      "value": "1"
+    },
+    {
+      "key": "idReserva",
+      "value": "1"
+    },
+    {
+      "key": "idCliente",
+      "value": "1"
+    },
+    {
+      "key": "idPedido",
+      "value": "1"
+    },
+    {
+      "key": "idDetalle",
+      "value": "1"
+    },
+    {
+      "key": "idProductoTemporal",
+      "value": "1"
+    }
+  ]
+}

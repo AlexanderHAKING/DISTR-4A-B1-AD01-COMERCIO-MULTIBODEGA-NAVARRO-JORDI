@@ -1,0 +1,12 @@
+using System.ComponentModel.DataAnnotations;
+namespace Catalogo.Api.Models;
+public class Producto
+{
+    [Key] public int IdProducto { get; set; }
+    public int IdCategoria { get; set; }
+    public int IdMarca { get; set; }
+    [Required, MaxLength(150)] public string Nombre { get; set; } = string.Empty;
+    [Required, MaxLength(60)] public string SKU { get; set; } = string.Empty;
+    public decimal Precio { get; set; }
+    public bool Estado { get; set; } = true;
+}
